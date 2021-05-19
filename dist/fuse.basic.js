@@ -1229,7 +1229,23 @@
     }, {
       key: "getCollection",
       value: function getCollection() {
-        return this._docs;
+        var records = this._myIndex.records;
+        var results = [];
+        records.forEach(function (_ref) {
+          var text = _ref.v,
+              idx = _ref.i,
+              norm = _ref.n;
+          results.push({
+            item: text,
+            idx: idx,
+            matches: [{
+              score: 1,
+              value: text,
+              norm: norm
+            }]
+          });
+        });
+        return results;
       }
     }, {
       key: "add",
@@ -1281,9 +1297,9 @@
     }, {
       key: "search",
       value: function search(query) {
-        var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-            _ref$limit = _ref.limit,
-            limit = _ref$limit === void 0 ? -1 : _ref$limit;
+        var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+            _ref2$limit = _ref2.limit,
+            limit = _ref2$limit === void 0 ? -1 : _ref2$limit;
 
         var _this$options = this.options,
             includeMatches = _this$options.includeMatches,
@@ -1316,10 +1332,10 @@
         var records = this._myIndex.records;
         var results = []; // Iterate over every string in the index
 
-        records.forEach(function (_ref2) {
-          var text = _ref2.v,
-              idx = _ref2.i,
-              norm = _ref2.n;
+        records.forEach(function (_ref3) {
+          var text = _ref3.v,
+              idx = _ref3.i,
+              norm = _ref3.n;
 
           if (!isDefined(text)) {
             return;
@@ -1364,9 +1380,9 @@
             records = _this$_myIndex.records;
         var results = []; // List is Array<Object>
 
-        records.forEach(function (_ref5) {
-          var item = _ref5.$,
-              idx = _ref5.i;
+        records.forEach(function (_ref6) {
+          var item = _ref6.$,
+              idx = _ref6.i;
 
           if (!isDefined(item)) {
             return;
@@ -1394,10 +1410,10 @@
       }
     }, {
       key: "_findMatches",
-      value: function _findMatches(_ref6) {
-        var key = _ref6.key,
-            value = _ref6.value,
-            searcher = _ref6.searcher;
+      value: function _findMatches(_ref7) {
+        var key = _ref7.key,
+            value = _ref7.value,
+            searcher = _ref7.searcher;
 
         if (!isDefined(value)) {
           return [];
@@ -1406,10 +1422,10 @@
         var matches = [];
 
         if (isArray(value)) {
-          value.forEach(function (_ref7) {
-            var text = _ref7.v,
-                idx = _ref7.i,
-                norm = _ref7.n;
+          value.forEach(function (_ref8) {
+            var text = _ref8.v,
+                idx = _ref8.i,
+                norm = _ref8.n;
 
             if (!isDefined(text)) {
               return;

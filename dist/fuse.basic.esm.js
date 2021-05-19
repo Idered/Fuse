@@ -1063,7 +1063,18 @@ class Fuse {
   }
 
   getCollection() {
-    return this._docs
+    const { records } = this._myIndex;
+    const results = [];
+
+    records.forEach(({ v: text, i: idx, n: norm }) => {
+      results.push({
+        item: text,
+        idx,
+        matches: [{ score: 1, value: text, norm }]
+      });
+    });
+
+    return results
   }
 
   add(doc) {
