@@ -32,6 +32,8 @@ declare class Fuse<T> {
 
   setCollection(docs: ReadonlyArray<T>, index?: Fuse.FuseIndex<T>): void
 
+  getCollection(): ReadonlyArray<T>
+
   /**
    * Adds a doc to the end the list.
    */
