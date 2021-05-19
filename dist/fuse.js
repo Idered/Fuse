@@ -1915,6 +1915,11 @@
         });
       }
     }, {
+      key: "getCollection",
+      value: function getCollection() {
+        return this._docs;
+      }
+    }, {
       key: "add",
       value: function add(doc) {
         if (!isDefined(doc)) {

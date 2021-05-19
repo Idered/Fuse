@@ -1519,6 +1519,10 @@ class Fuse {
       });
   }
 
+  getCollection() {
+    return this._docs
+  }
+
   add(doc) {
     if (!isDefined(doc)) {
       return
